@@ -1,0 +1,107 @@
+<div class="container mx-auto my-16">
+  <h1 class="text-5xl mt-0 mb-5">Absar's Password Manager</h1>
+  <p class="mb-5">
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Provident, quod.
+    Sed assumenda odit animi voluptate sunt atque adipisci, eum porro sit
+    aperiam perferendis consequuntur accusantium qui impedit eius nobis
+    praesentium?
+  </p>
+  <button
+    (click)="addNewSite()"
+    class="mb-5 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md"
+  >
+    Add New Site
+  </button>
+  <!-- Add New Site Form -->
+
+  <div class="px-20 py-10 mb-10 my-5 border-4 border-gray-900">
+    <h2 class="text-3xl text-center">{{ formNew }} Site</h2>
+    <p class="text-center">You can add a new site from the below form</p>
+    <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
+      <div class="flex flex-col" *ngIf="singleSite.siteId != 0">
+        <label for="" class="text-lg font-medium mb-2">Site Id</label>
+        <input
+          type="text"
+          id="site-name"
+          name="siteId"
+          [(ngModel)]="singleSite.siteId"
+          class="border-2 border-gray-900 p-2 rounded-lg w-full"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="" class="text-lg font-medium mb-2">Site Name</label>
+        <input
+          type="text"
+          id="site-name"
+          name="siteName"
+          [(ngModel)]="singleSite.siteName"
+          class="border-2 border-gray-900 p-2 rounded-lg w-full"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="" class="text-lg font-medium mb-2">Site URL</label>
+        <input
+          type="text"
+          name="siteURL"
+          [(ngModel)]="singleSite.siteURL"
+          class="border-2 border-gray-900 p-2 rounded-lg w-full"
+        />
+      </div>
+      <div class="flex flex-col">
+        <label for="" class="text-lg font-medium mb-2">Site Image URL</label>
+        <input
+          type="text"
+          name="siteImgURL"
+          [(ngModel)]="singleSite.siteImgURL"
+          class="border-2 border-gray-900 p-2 rounded-lg w-full"
+        />
+      </div>
+      <button
+        class="mt-10 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md"
+      >
+        {{ formNew }} Site
+      </button>
+      <button
+        class="mt-10 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
+      >
+        Cancel
+      </button>
+    </form>
+  </div>
+
+  <!-- Card -->
+  <div class="grid grid-cols-4 gap-5">
+    <div
+      *ngFor="let site of allSites"
+      class="shadow-lg border-2 border-gray-900"
+    >
+      <img
+        [src]="site.siteImgURL"
+        alt=""
+        style="height: 150px"
+        class="text-center"
+      />
+      <h3 class="p-3 text-xl font-bold">{{ site.siteName }}</h3>
+      <div class="w-60 m-3 px-3 bg-blue-200 text-blue-800 rounded-lg text-sm">
+        {{ site.siteURL }}
+      </div>
+      <button
+        class="my-3 ml-3 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md"
+      >
+        Add New Password
+      </button>
+      <button
+        class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
+        (click)="editSite(site)"
+      >
+        Edit
+      </button>
+      <button
+        (click)="deleteSite(site.siteId)"
+        class="my-3 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900 shadow rounded-md"
+      >
+        Delete
+      </button>
+    </div>
+  </div>
+</div>
